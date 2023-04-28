@@ -4,6 +4,8 @@
 
 ;; Author: Vineet Naik <naikvin@gmail.com>
 ;; URL: https://github.com/naiquevin/sphinx-doc.el
+;; Package-Version: 20210213.1250
+;; Package-Commit: 1eda612a44ef027e5229895daa77db99a21b8801
 ;; Version: 0.3.0
 ;; Keywords: Sphinx, Python
 ;; Package-Requires: ((s "1.9.0") (cl-lib "0.5") (dash "2.10.0"))
@@ -45,7 +47,6 @@
 (require 'cl-lib)
 (require 'dash)
 (require 's)
-
 
 (defun sphinx-doc-current-line ()
   "Return current line as string."
@@ -113,7 +114,7 @@
 
 
 (cl-defstruct sphinx-doc-doc
-  (summary "TODO describe function") ; summary line that fits on the first line
+  (summary ".") ; summary line that fits on the first line
   before-fields                      ; list of comments before fields
   after-fields                       ; list of comments after fields
   fields)                            ; list of field objects
@@ -153,9 +154,10 @@
    :fields (append
             (-mapcat 'sphinx-doc-arg->fields
                      (sphinx-doc-fndef-args f))
-             (list (make-sphinx-doc-field :key "returns")
-                   ;;(make-sphinx-doc-field :key "rtype")
-                   ))))
+             ;; (list (make-sphinx-doc-field :key "")
+             ;;       ;;(make-sphinx-doc-field :key "rtype")
+             ;;       )
+             )))
 
 (defun sphinx-doc-split-args (input)
   "Like (split-string input \",\") but don't split on coma inside type hints"
